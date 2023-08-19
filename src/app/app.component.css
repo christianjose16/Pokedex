@@ -78,6 +78,17 @@ p {
     line-height: 48px;
 }
 
+.form-container>span {
+    color: var(--neutro-gris-40, #868686);
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 340px;
+    display: block;
+}
+
 .title-hello>p {
     margin-left: 30px;
     color: #868686;
@@ -137,12 +148,14 @@ p {
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 120%; 
+    line-height: 120%;
 }
+
 .card-profile>button>span {
     flex: 1;
-    text-align:initial;
+    text-align: initial;
 }
+
 svg.material-icons {
     height: 30px;
     width: auto;
