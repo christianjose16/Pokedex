@@ -12,10 +12,11 @@
     <div class="col-md-6 profile-container">
       <div class="card-profile">
         <h1>Imágen perfil</h1>
-        <div class="img-container">
-          <img class="svg-user" src="../assets/user.svg">
+        <div class="img-container" [ngStyle]="imgContainerStyle">
+          <img class="svg-user" [ngStyle]="svgUserStyle" src="../assets/user.svg">
         </div>
-        <button><span>Adjunta una foto</span> <img class="svg-user" src="../assets/cloud.svg"></button>
+        <input type="file" id="fileInput" style="display: none" (change)="onFileSelected($event)" >
+        <button  (click)="uploadImage()"><span>Adjunta una foto</span> <img class="svg-user" src="../assets/cloud.svg"></button>
       </div>
     </div>
     <div class="col-md-6 form-container">

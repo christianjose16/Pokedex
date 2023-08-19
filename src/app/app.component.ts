@@ -10,6 +10,13 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class AppComponent implements OnInit{
   formularioPerfil: FormGroup;
+  uploadedImage: boolean = false;
+  uploadedImageUrl: string = '';
+  selectedFile: File | null = null;
+  imgContainerStyle: { [key: string]: string } = {};
+  svgUserStyle: { [key: string]: string } = {};
+
+
   constructor(private fb: FormBuilder) {
     this.formularioPerfil = this.fb.group({
       'nombre': new FormControl('', Validators.required),
@@ -20,5 +27,19 @@ export class AppComponent implements OnInit{
   }
   ngOnInit() {
 
+  }
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      const imageUrl = URL.createObjectURL(this.selectedFile);
+      this.imgContainerStyle['background-image'] = `url(${imageUrl})`;
+      this.imgContainerStyle['background-size'] = `cover`;
+      this.svgUserStyle['display'] = `none`;
+    }
+  }
+
+  uploadImage(): void {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    fileInput.click();
   }
 }
