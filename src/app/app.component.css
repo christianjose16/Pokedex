@@ -44,15 +44,12 @@ p {
     /* Aquí se define la sombra */
 }
 
-.profile-container {
-    padding-left: 125px;
-    padding-right: 220px;
-    text-align: left;
-}
-
 .toolbar img {
     margin: 0 40px;
 }
+
+
+
 
 .title-hello {
     font-size: 35px;
@@ -87,6 +84,77 @@ p {
     line-height: normal;
     max-width: 340px;
     display: block;
+}
+
+.form-container>form {
+    margin-top: 7px;
+    max-width: 334px;
+}
+
+
+.form-group {
+    position: relative;
+    width: 100%;
+    /* Ajusta el ancho según tus necesidades */
+    margin-top: 24px;
+    /* Espacio entre elementos */
+}
+
+.form-control {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* Añadido para mejor apariencia */
+    transition: border-color 0.2s ease-in-out;
+    /* Transición del borde */
+}
+
+.form-control:focus {
+    border-color: #007bff;
+}
+
+.floating-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: 0.2s ease-out;
+    font-size: 14px;
+    color: #999;
+}
+
+.form-control:focus+.floating-label {
+    transform: translate(-10px, -200%) scale(0.75);
+    color: #007bff;
+    background-color: white;
+}
+
+.form-action {
+    margin-top: 68px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+.form-action>button {
+    display: block;
+    width: 222px;
+    height: 50px;
+    justify-content: center;
+    color: var(--neutro-gris-40, #868686);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+.profile-container {
+    padding-left: 125px;
+    padding-right: 220px;
+    text-align: left;
 }
 
 .title-hello>p {
