@@ -95,22 +95,26 @@ p {
 .form-group {
     position: relative;
     width: 100%;
-    /* Ajusta el ancho según tus necesidades */
     margin-top: 24px;
-    /* Espacio entre elementos */
+
 }
 
 .form-control {
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    /* Añadido para mejor apariencia */
     transition: border-color 0.2s ease-in-out;
-    /* Transición del borde */
+
 }
 
 .form-control:focus {
-    border-color: #007bff;
+    border: 1px solid var(--primary-azul-azul-00, #01426A);
+    color: var(--neutro-negro-50, #454545);
+    font-family: Poppins;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
 }
 
 .floating-label {
@@ -124,9 +128,14 @@ p {
     color: #999;
 }
 
-.form-control:focus+.floating-label {
+.form-control:focus+.floating-label, .form-control:placeholder-shown+.floating-label {
     transform: translate(-10px, -200%) scale(0.75);
-    color: #007bff;
+    color: var(--primary-azul-azul-00, #01426A);
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
     background-color: white;
 }
 
@@ -222,6 +231,7 @@ p {
 .card-profile>button>span {
     flex: 1;
     text-align: initial;
+    max-width: 152px;
 }
 
 svg.material-icons {

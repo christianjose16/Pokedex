@@ -15,7 +15,8 @@ export class AppComponent implements OnInit{
   selectedFile: File | null = null;
   imgContainerStyle: { [key: string]: string } = {};
   svgUserStyle: { [key: string]: string } = {};
-
+  uploadPhotoText = "Adjunta una foto";
+  imgButtonPath="../assets/cloud.svg";
 
   constructor(private fb: FormBuilder) {
     this.formularioPerfil = this.fb.group({
@@ -35,6 +36,8 @@ export class AppComponent implements OnInit{
       this.imgContainerStyle['background-image'] = `url(${imageUrl})`;
       this.imgContainerStyle['background-size'] = `cover`;
       this.svgUserStyle['display'] = `none`;
+      this.imgButtonPath="../assets/trash.svg";
+      this.uploadPhotoText = this.selectedFile.name;
     }
   }
 

@@ -16,7 +16,7 @@
           <img class="svg-user" [ngStyle]="svgUserStyle" src="../assets/user.svg">
         </div>
         <input type="file" id="fileInput" style="display: none" (change)="onFileSelected($event)" >
-        <button  (click)="uploadImage()"><span>Adjunta una foto</span> <img class="svg-user" src="../assets/cloud.svg"></button>
+        <button  (click)="uploadImage()"><span>{{uploadPhotoText}}</span> <img class="svg-user" [src]="imgButtonPath"></button>
       </div>
     </div>
     <div class="col-md-6 form-container">
@@ -24,21 +24,20 @@
       <span>Completa la siguiente información para completar tu perfil</span>
       <form [formGroup]="formularioPerfil">
         <div class="form-group">
-          
-          <input class="form-control" id="nombre" type="text" formControlName="nombre">
+          <input class="form-control" id="nombre" type="text" formControlName="nombre" required>
           <label class="floating-label" >Nombre*</label>
         </div>
         <div class="form-group">
           
-          <input  class="form-control"  id="pasatiempo" type="text" formControlName="pasatiempo">
+          <input  class="form-control"  id="pasatiempo" type="text" formControlName="pasatiempo" required>
           <label class="floating-label" >Pasa tiempo favorito</label>
         </div>
         <div class="form-group">
-          <input  class="form-control" id="cumple" type="text" formControlName="cumple" type="date">
+          <input  class="form-control" id="cumple" type="text" formControlName="cumple" type="date" required>
           <label class="floating-label" >Cumpleaños*</label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="documento" type="text" formControlName="documento">
+          <input class="form-control" id="documento" type="text" formControlName="documento" required>
           <label class="floating-label">Documento*</label>
         </div>
         <div class="form-action">
