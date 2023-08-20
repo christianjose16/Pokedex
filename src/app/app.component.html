@@ -28,7 +28,6 @@
           <label class="floating-label" >Nombre*</label>
         </div>
         <div class="form-group">
-          
           <select  class="form-control"  id="pasatiempo" type="text" formControlName="pasatiempo" >
             <option>Jugar Fútbol</option>
             <option>Jugar Basquetball</option>
@@ -44,7 +43,7 @@
           <label class="floating-label" >Cumpleaños*</label>
         </div>
         <div class="form-group">
-          <input class="form-control" id="documento" type="text" formControlName="documento" required>
+          <input class="form-control" [textMask]="{ mask: documentoMask }" id="documento" type="text" formControlName="documento" required>
           <label class="floating-label">Documento*</label>
         </div>
         <div class="form-action">

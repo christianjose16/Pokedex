@@ -129,7 +129,8 @@ p {
     color: #999;
 }
 
-.form-control:focus+.floating-label, .form-control:valid+.floating-label {
+.form-control:focus+.floating-label,
+.form-control:valid+.floating-label {
     transform: translate(-10px, -200%) scale(0.75);
     color: var(--primary-azul-azul-00, #01426A);
     font-family: Poppins;
@@ -139,25 +140,27 @@ p {
     line-height: normal;
     background-color: white;
 }
+
 input[type="date"]::before {
     content: attr(placeholder);
     position: absolute;
     color: #999999;
-  }
-  
-  input[type="date"] {
+}
+
+input[type="date"] {
     color: #ffffff;
-  }
-  
-  input[type="date"]:focus,
-  input[type="date"]:valid {
+}
+
+input[type="date"]:focus,
+input[type="date"]:valid {
     color: #666666;
-  }
-  
-  input[type="date"]:focus::before,
-  input[type="date"]:valid::before {
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
     content: "";
-  }
+}
+
 .form-action {
     margin-top: 68px;
     width: 100%;
@@ -177,6 +180,9 @@ input[type="date"]::before {
     font-style: normal;
     font-weight: 600;
     line-height: 22px;
+    border-radius: 10px;
+    border: none;
+    background: var(--neutro-gris-20, #E6E6E6);
 }
 
 .profile-container {

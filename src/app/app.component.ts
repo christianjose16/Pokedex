@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TextMaskModule } from 'angular2-text-mask';
+
 
 @Component({
   selector: 'app-root',
@@ -17,6 +19,7 @@ export class AppComponent implements OnInit{
   svgUserStyle: { [key: string]: string } = {};
   uploadPhotoText = "Adjunta una foto";
   imgButtonPath="../assets/cloud.svg";
+  documentoMask = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/];
 
   constructor(private fb: FormBuilder) {
     this.formularioPerfil = this.fb.group({
