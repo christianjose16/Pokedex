@@ -1,0 +1,35 @@
+.pokeItemcontainer {
+    width: 163px;
+    border-radius: 20px;
+    background: var(--neutro-gris-10, #F2F2F2);
+    width: 163.437px;
+    height: 106.352px;
+    flex-shrink: 0;
+    text-align: center;
+    
+}
+.pokeItemcontainer img {
+    width: 109px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    height: 109px;
+    top:-44px
+  }
+.pokeitem-name {
+    position: absolute;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    width: 135.736px;
+    height: 25.322px;
+    padding: 6px 15px;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--primary-azul-azul-00, #01426A);
+    margin-top: -40px; 
+    margin-left: 10px; 
+    margin-right: 12px; 
+}

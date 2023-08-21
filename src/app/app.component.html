@@ -2,33 +2,44 @@
   <img height="100%" alt="Angular Logo" src="../assets/pokemonlogo.png" />
 </div>
 
-<div class="container main-content" role="main">
+<div *ngIf="!submittingForm" class="container main-content" role="main">
   <div class="row title-hello">
-    <div class="col-lg-12 "><i class="bi bi-chevron-compact-left"></i><strong>¡Hola!</strong> Configuremos tu perfil
+    <div class="col-lg-12 "><i class="bi bi-chevron-compact-left"></i><strong>{{titleStrong}}</strong> {{titleLigth}}
     </div>
-    <p>Queremos conocerte mejor.</p>
+    <p>{{subTitle}}</p>
   </div>
   <div class="row">
     <div class="col-md-6 profile-container">
       <div class="card-profile">
-        <h1>Imágen perfil</h1>
+        <h1>{{titleCard}}</h1>
         <div class="img-container" [ngStyle]="imgContainerStyle">
           <img class="svg-user" [ngStyle]="svgUserStyle" src="../assets/user.svg">
         </div>
-        <input type="file" id="fileInput" style="display: none" (change)="onFileSelected($event)" >
-        <button  (click)="uploadImage()"><span>{{uploadPhotoText}}</span> <img class="svg-user" [src]="imgButtonPath"></button>
+        <input type="file" id="fileInput" style="display: none" (change)="onFileSelected($event)">
+        <button *ngIf="intPaso==0" (click)="uploadImage()"><span>{{uploadPhotoText}}</span> <img class="svg-user"
+            [src]="imgButtonPath"></button>
+        <div *ngIf="intPaso!=0">
+          <div class="profiledataTable">
+            <div class="r1 col-left" style="text-align: left;">Pasatiempo</div>
+            <div class="r1 col-rigth" style="text-align: right;">{{pasatiempo}}</div>
+            <div class="r2 col-left">Edad</div>
+            <div class="r2 col-rigth">{{edad}}</div>
+            <div class="r3 col-left" *ngIf="mayoredad">DUI</div>
+            <div class="r3 col-rigth" *ngIf="mayoredad"></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-6 form-container">
+    <div class="col-md-6 form-container" *ngIf="intPaso==1">
       <h2>Tu información</h2>
       <span>Completa la siguiente información para completar tu perfil</span>
       <form [formGroup]="formularioPerfil">
         <div class="form-group">
           <input class="form-control" id="nombre" type="text" formControlName="nombre" required>
-          <label class="floating-label" >Nombre*</label>
+          <label class="floating-label">Nombre*</label>
         </div>
         <div class="form-group">
-          <select  class="form-control"  id="pasatiempo" type="text" formControlName="pasatiempo" >
+          <select class="form-control pasatiempos" id="pasatiempo" type="text" formControlName="pasatiempo">
             <option>Jugar Fútbol</option>
             <option>Jugar Basquetball</option>
             <option>Jugar Tennis</option>
@@ -36,21 +47,41 @@
             <option>Jugar Fifa</option>
             <option>Jugar Videojuegos</option>
           </select>
-          <label class="floating-label" >Pasa tiempo favorito</label>
+          <label class="floating-label ">Pasa tiempo favorito</label>
         </div>
         <div class="form-group">
-          <input  class="form-control" id="cumple" type="text" formControlName="cumple" type="date" required>
-          <label class="floating-label" >Cumpleaños*</label>
+          <input class="form-control" id="cumple" type="text" formControlName="cumple" type="date" required>
+          <label class="floating-label">Cumpleaños*</label>
         </div>
         <div class="form-group">
-          <input class="form-control" [textMask]="{ mask: documentoMask }" id="documento" type="text" formControlName="documento" required>
-          <label class="floating-label">Documento*</label>
+          <input class="form-control" [textMask]="{ mask: documentoMask }" id="documento" type="text"
+            formControlName="documento" required>
+          <label class="floating-label">{{documentoLabel}}</label>
         </div>
         <div class="form-action">
-          <button>Continuar</button>
+          <button type="submit" [ngClass]="{'valid-form-button': isFormValid, 'invalid-form-button': !isFormValid}"
+            (click)="onSubmit()">Continuar</button>
         </div>
       </form>
     </div>
+    <div class="col-md-6 form-container" *ngIf="intPaso==0">
+      <h2>Pokémon</h2>
+      <span>Selecciona 3 Pokémon para que sean parte de tu equipo</span>
+      <div class="pokemonList">
+        <div [ngClass]="(poke.status==0 && countSelectedPokemons() >= 3) ? 'pokeItem blocked' : 'pokeItem'"
+          *ngFor="let poke of pokemons">
+          <div [ngClass]="poke.status==1 ? 'pokeItemcontainer selected' : 'pokeItemcontainer unselected'" (click)="toggleStatus(poke)">
+            <img [src]="poke.image">
+            <span class="pokeitem-name"><span>{{ poke.number | numberId }}</span> <span>{{poke.name}}</span></span>
+          </div>
+        </div>
+        <div class="form-action-save">
+          <button type="submit" [ngClass]="countSelectedPokemons() >= 3 ? 'valid-button' : 'invalid-button'"
+            (click)="onSubmit()">Guardar</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
-<router-outlet></router-outlet>
+<app-loader *ngIf="submittingForm"></app-loader>
