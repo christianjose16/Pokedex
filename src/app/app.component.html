@@ -3,10 +3,14 @@
 </div>
 
 <div *ngIf="!submittingForm" class="container main-content" role="main">
-  <div class="row title-hello">
+  <div class="row title-hello" *ngIf="intPaso!=2">
     <div class="col-lg-12 "><i class="bi bi-chevron-compact-left"></i><strong>{{titleStrong}}</strong> {{titleLigth}}
     </div>
     <p>{{subTitle}}</p>
+  </div>
+  <div class="row title-hello2" *ngIf="intPaso==2">
+    <div class="">{{titleStrong}}</div>
+    <a (click)="backTozero()" class="btn-edit"><i class="bi bi-pencil"></i>&nbsp;Editar Perfil</a>
   </div>
   <div class="row">
     <div class="col-md-6 profile-container">

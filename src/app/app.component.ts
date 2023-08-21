@@ -140,6 +140,9 @@ export class AppComponent implements OnInit {
   backToone(){
     this.intPaso = 1;
   }
+  backTozero(){
+    this.intPaso = 0;
+  }
   async savePokemons(): Promise<void> {
     this.submittingForm = true;
     this.cdr.detectChanges();

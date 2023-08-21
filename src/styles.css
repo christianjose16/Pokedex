@@ -56,6 +56,16 @@ p {
     color: #185a7d;
     font-family: 'Poppins', sans-serif;
 }
+.title-hello2 {
+    display: flex;
+    font-size: 35px;
+    font-weight: 600;
+    color: #185a7d;
+    font-family: 'Poppins', sans-serif;
+    justify-content: space-between;
+    max-width: 332px;
+    margin-left: 133px;
+}
 
 .title-hello>strong {
     font-weight: 900;
@@ -97,7 +107,7 @@ p {
     line-height: normal;
 }
 
-.title-mis>a {
+.title-mis>a, .btn-edit {
     display: flex;
     width: 134px;
     height: 30px;
