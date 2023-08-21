@@ -11,7 +11,8 @@
   <div class="row">
     <div class="col-md-6 profile-container">
       <div class="card-profile">
-        <h1>{{titleCard}}</h1>
+        <h1 *ngIf="intPaso!=2">{{titleCard}}</h1>
+        <div class="title-entrenador" *ngIf="intPaso==2"><span>Entrenador</span><img src="../assets/medalla.svg"></div>
         <div class="img-container" [ngStyle]="imgContainerStyle">
           <img class="svg-user" [ngStyle]="svgUserStyle" src="../assets/user.svg">
         </div>
@@ -30,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 form-container" *ngIf="intPaso==1">
+    <div class="col-md-6 form-container" *ngIf="intPaso==0">
       <h2>Tu información</h2>
       <span>Completa la siguiente información para completar tu perfil</span>
       <form [formGroup]="formularioPerfil">
@@ -64,20 +65,81 @@
         </div>
       </form>
     </div>
-    <div class="col-md-6 form-container" *ngIf="intPaso==0">
+    <div class="col-md-6 form-container" *ngIf="intPaso==1">
       <h2>Pokémon</h2>
-      <span>Selecciona 3 Pokémon para que sean parte de tu equipo</span>
+      <span class="pokestres">Selecciona 3 Pokémon para que sean parte de tu equipo</span>
+      <div class="search-container">
+        <i class="bi bi-search"></i>
+        <input class="search-field" type="search" [(ngModel)]="searchTerm" (ngModelChange)="filterPokemons()"
+          placeholder="Buscar Pokémon" />
+      </div>
       <div class="pokemonList">
         <div [ngClass]="(poke.status==0 && countSelectedPokemons() >= 3) ? 'pokeItem blocked' : 'pokeItem'"
-          *ngFor="let poke of pokemons">
-          <div [ngClass]="poke.status==1 ? 'pokeItemcontainer selected' : 'pokeItemcontainer unselected'" (click)="toggleStatus(poke)">
+          *ngFor="let poke of filteredPokemons">
+          <div [ngClass]="poke.status==1 ? 'pokeItemcontainer selected' : 'pokeItemcontainer unselected'"
+            (click)="toggleStatus(poke)">
             <img [src]="poke.image">
             <span class="pokeitem-name"><span>{{ poke.number | numberId }}</span> <span>{{poke.name}}</span></span>
           </div>
         </div>
         <div class="form-action-save">
           <button type="submit" [ngClass]="countSelectedPokemons() >= 3 ? 'valid-button' : 'invalid-button'"
-            (click)="onSubmit()">Guardar</button>
+            (click)="savePokemons()">Guardar</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6 form-container" *ngIf="intPaso==2">
+      <div class="title-mis"><h2>Mis Pokémon</h2> <a (click)="backToone()"><i class="bi bi-pencil"></i>&nbsp;Editar </a></div>
+      <div class="mispokemonList">
+        <div [ngClass]="(poke.status==0 && countSelectedPokemons() >= 3) ? 'mispokeItem' : 'mispokeItem'"
+          *ngFor="let poke of misPokemon">
+
+            <div class="pokeview-left">
+              <img [src]="poke.image">
+              <span class="pw-name">{{poke.name}}</span>
+              <span class="pw-tipo">tipo</span>
+            </div>
+            
+            <div class="pokeview-right">
+              <div class="stat-container">
+                <div class="stat-label">HP</div>
+                <div class="stat-bar">
+                  <div class="stat-progress" style="width: 50%;"></div>
+                </div>
+              </div>
+              <div class="stat-container">
+                <div class="stat-label">Ataque</div>
+                <div class="stat-bar">
+                  <div class="stat-progress" style="width: 60%;"></div>
+                </div>
+              </div>
+              <div class="stat-container">
+                <div class="stat-label">Defensa</div>
+                <div class="stat-bar">
+                  <div class="stat-progress" style="width: 80%;"></div>
+                </div>
+              </div>
+              <div class="stat-container">
+                <div class="stat-label">Ataque Especial</div>
+                <div class="stat-bar">
+                  <div class="stat-progress" style="width: 65%;"></div>
+                </div>
+              </div>
+              <div class="stat-container">
+                <div class="stat-label">Defensa Especial</div>
+                <div class="stat-bar">
+                  <div class="stat-progress" style="width: 70%;"></div>
+                </div>
+              </div>
+              <div class="stat-container">
+                <div class="stat-label">Velocidad</div>
+                <div class="stat-bar">
+                  <div class="stat-progress" style="width: 80%;"></div>
+                </div>
+              </div>
+            </div>
+
         </div>
       </div>
 

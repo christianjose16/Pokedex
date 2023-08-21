@@ -65,13 +65,54 @@ p {
     max-width: 100px;
 }
 
-.form-container>h2 {
+.form-container>h2,
+.form-container>div>h2 {
     color: var(--primary-azul-azul-00, #01426A);
     font-family: Poppins;
     font-size: 30px;
     font-style: normal;
     font-weight: 400;
     line-height: 48px;
+
+}
+
+.title-mis {
+    max-width: 637px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-entrenador {
+    display: flex;
+    justify-content: space-between;
+    width: 312px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFF;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.title-mis>a {
+    display: flex;
+    width: 134px;
+    height: 30px;
+    padding: 0px 21px 0px 22px;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-azul-azul-00, #01426A);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    border-radius: 10px;
+    border: 1px solid var(--primary-azul-azul-00, #01426A);
 }
 
 .form-container>span {
@@ -191,6 +232,47 @@ input[type="date"]:valid::before {
     width: 100%;
     justify-content: center;
     display: flex;
+}
+
+.search-container {
+    color: var(--opacidad-oscuro-40, rgba(0, 0, 0, 0.40));
+    font-family: Gotham;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 21px;
+    width: 521px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border-radius: 10px;
+    background: var(--neutro-gris-10, #F2F2F2);
+}
+
+.search-icon {
+    color: #888;
+}
+
+.pokestres {
+    width: 520px !important;
+    max-width: 520px !important;
+}
+
+.search-field {
+    position: relative;
+    color: var(--opacidad-oscuro-40, rgba(0, 0, 0, 0.40));
+    font-family: Gotham;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 21px;
+    width: 500px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border-radius: 10px;
+    border: none;
+    background: var(--neutro-gris-10, #F2F2F2);
 }
 
 .form-action-save>.invalid-button {
@@ -427,6 +509,15 @@ svg.material-icons:not(:last-child) {
 
 }
 
+.mispokemonList {
+    display: grid;
+
+    justify-content: center;
+    margin-top: 80px;
+    max-width: 539px;
+
+}
+
 .unselected {
     background: var(--neutro-gris-10, #F2F2F2);
 
@@ -476,6 +567,100 @@ svg.material-icons:not(:last-child) {
     height: 138px;
     margin-right: 15px;
     margin-top: 5px;
+}
+
+.mispokeItem {
+    display: grid;
+    grid-template-columns: 210px auto;
+    width: 637px;
+    height: 317px;
+    margin-right: 15px;
+    margin-top: 5px;
+    width: 637px;
+    height: 317px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: var(--neutro-gris-10, #F2F2F2);
+    margin-top: 28px;
+    box-shadow: 0px 8px 28px 0px rgba(120, 177, 181, 0.10);
+    padding-left: 35px;
+    padding-top: 23px;
+    padding-right: 33px;
+}
+
+.stat-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.stat-label {
+    width: 190px;
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bold;
+    color: #4B4B4B;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+}
+
+.stat-bar {
+    width: 160px;
+    height: 13px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    border-color: white;
+    border: white 1px;
+}
+
+.stat-progress {
+    height: 100%;
+    background-color: #4caf50;
+}
+
+.pokeview-left {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 200px;
+    grid-column: 1;
+}
+
+.pokeview-right {
+    grid-column: 2;
+}
+
+.pokeview-left>img {
+    max-height: 187px;
+    width: auto;
+}
+
+.pw-name {
+    color: #000;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.pw-tipo {
+    color: #000;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .card {

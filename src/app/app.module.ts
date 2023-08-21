@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TextMaskModule } from 'angular2-text-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { NumberIdPipe } from './numberid.pipe';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,8 @@ import { PokeitemComponent } from './pokeitem/pokeitem.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     TextMaskModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent ]

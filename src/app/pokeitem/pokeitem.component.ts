@@ -18,7 +18,6 @@ export class PokeitemComponent {
     this.dxs.getPokemon(this.name).subscribe(pokelist => {
       this.pokeitem = pokelist;
       this.photoSrc = this.pokeitem.sprites.front_default
-      console.log(pokelist)
     });
   }
 }

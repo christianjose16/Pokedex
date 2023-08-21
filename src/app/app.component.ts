@@ -35,7 +35,10 @@ export class AppComponent implements OnInit {
   edad = ""
   dni = ""
   mayoredad = true;
-  pokelist: any;
+  pokelist: any=[];
+  misPokemon:any;
+  searchTerm: string = ''; 
+  nombre = "";
   pokemons=[
     {
       name :"Bulbasur",
@@ -82,9 +85,9 @@ export class AppComponent implements OnInit {
       number:9,
       image:"../assets/009.png",
       status:0
-    }
+    }];
+    filteredPokemons: any = this.pokemons;
 
-  ]
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private dxs: DexterService) {
     this.pokelist={results:[]} 
@@ -97,6 +100,7 @@ export class AppComponent implements OnInit {
     this.formularioPerfil.statusChanges.subscribe((status: string) => {
       this.isFormValid = status === 'VALID';
       this.pasatiempo = this.formularioPerfil.value.pasatiempo;
+      this.nombre = this.formularioPerfil.value.nombre;
     });
     this.formularioPerfil.get('cumple')?.valueChanges.subscribe((date: Date) => {
       const today = new Date();
@@ -127,6 +131,32 @@ export class AppComponent implements OnInit {
         poke.status = 0;
       }
     }
+  }
+  filterPokemons() {
+    this.filteredPokemons = this.pokemons.filter(poke =>
+      poke.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+  backToone(){
+    this.intPaso = 1;
+  }
+  async savePokemons(): Promise<void> {
+    this.submittingForm = true;
+    this.cdr.detectChanges();
+
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        this.misPokemon = this.pokemons.filter(pokemon => pokemon.status === 1);
+        this.intPaso = 2;
+        this.titleStrong = "¡Hola " + this.nombre+"!";
+        this.titleLigth = "";
+        this.subTitle = "";
+        resolve();
+      }, 2000);
+    });
+
+    this.submittingForm = false;
+    this.cdr.detectChanges();
   }
   countSelectedPokemons(): number {
     return this.pokemons.filter(poke => poke.status === 1).length;
