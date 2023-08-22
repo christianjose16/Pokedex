@@ -79,6 +79,14 @@
       </div>
       <div class="pokemonList">
         <div [ngClass]="(poke.status==0 && countSelectedPokemons() >= 3) ? 'pokeItem blocked' : 'pokeItem'"
+          *ngFor="let poke of pokemons">
+          <div [ngClass]="poke.status==1 ? 'pokeItemcontainer selected' : 'pokeItemcontainer unselected'"
+            (click)="toggleStatus(poke)">
+            <img [src]="poke.image">
+            <span class="pokeitem-name"><span>{{ poke.number | numberId }}</span> <span>{{poke.name}}</span></span>
+          </div>
+        </div>
+        <div [ngClass]="(poke.status==0 && countSelectedPokemons() >= 3) ? 'pokeItem blocked' : 'pokeItem'"
           *ngFor="let poke of filteredPokemons">
           <div [ngClass]="poke.status==1 ? 'pokeItemcontainer selected' : 'pokeItemcontainer unselected'"
             (click)="toggleStatus(poke)">

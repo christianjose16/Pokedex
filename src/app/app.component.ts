@@ -7,6 +7,7 @@ import { LoaderComponent } from './loader/loader.component'
 import { DexterService } from './services/dexter.service';
 import { PokeitemComponent } from './pokeitem/pokeitem.component';
 import { CommonModule } from '@angular/common';
+import { Pokemon } from './models/pokeItem';
 
 @Component({
   selector: 'app-root',
@@ -35,62 +36,16 @@ export class AppComponent implements OnInit {
   edad = ""
   dni = ""
   mayoredad = true;
-  pokelist: any=[];
-  misPokemon:any;
-  searchTerm: string = ''; 
+  pokelist: any = [];
+  misPokemon: any;
+  searchTerm: string = '';
   nombre = "";
-  pokemons=[
-    {
-      name :"Bulbasur",
-      number:1,
-      image:"../assets/001.png",
-      status:0
-    },{
-      name :"Ivysaur",
-      number:2,
-      image:"../assets/002.png",
-      status:0
-    },{
-      name :"Venusaur",
-      number:3,
-      image:"../assets/003.png",
-      status:0
-    },{
-      name :"Charman",
-      number:4,
-      image:"../assets/004.png",
-      status:0
-    },{
-      name :"Charmele",
-      number:5,
-      image:"../assets/005.png",
-      status:0
-    },{
-      name :"Charizar",
-      number:6,
-      image:"../assets/006.png",
-      status:0
-    },{
-      name :"Squirtle",
-      number:7,
-      image:"../assets/007.png",
-      status:0
-    },{
-      name :"Wartortle",
-      number:8,
-      image:"../assets/008.png",
-      status:0
-    },{
-      name :"Blastoise",
-      number:9,
-      image:"../assets/009.png",
-      status:0
-    }];
-    filteredPokemons: any = this.pokemons;
+  pokemons: Pokemon[] = [];
+  filteredPokemons: Pokemon[] = [];
 
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private dxs: DexterService) {
-    this.pokelist={results:[]} 
+    this.pokelist = { results: [] }
     this.formularioPerfil = this.fb.group({
       'nombre': new FormControl('', Validators.required),
       'pasatiempo': new FormControl('', Validators.required),
@@ -124,23 +79,78 @@ export class AppComponent implements OnInit {
 
   }
   toggleStatus(poke: any): void {
-    if(this.countSelectedPokemons() <3){
-      poke.status = poke.status === 0 ? 1 : 0; 
-    }else{
-      if(poke.status === 1){
+    if (this.countSelectedPokemons() < 3) {
+      if (poke.status === 1) {
+        this.pokemons = this.pokemons.filter(pokemon => pokemon.number !== poke.number);
+        this.filteredPokemons.push({
+          name: poke.name,
+          image: poke.image,
+          number: poke.number,
+          status: 0,
+        });
+      } else {
+        this.filteredPokemons = this.filteredPokemons.filter(pokemon => pokemon.number !== poke.number);
+        this.pokemons.push({
+          name: poke.name,
+          image: poke.image,
+          number: poke.number,
+          status: 1,
+        });
+
+      }
+      poke.status = poke.status === 0 ? 1 : 0;
+    } else {
+      if (poke.status === 1) {
         poke.status = 0;
+        this.pokemons = this.pokemons.filter(pokemon => pokemon.number !== poke.number);
+        this.filteredPokemons.push({
+          name: poke.name,
+          image: poke.image,
+          number: poke.number,
+          status: 0,
+        });
       }
     }
   }
   filterPokemons() {
-    this.filteredPokemons = this.pokemons.filter(poke =>
-      poke.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    this.filteredPokemons = [];
+    if (this.searchTerm.toLowerCase() == "") {
+      this.dxs.getPokemons().subscribe(pokelist => {
+        this.pokelist = pokelist;
+        this.filteredPokemons = [];
+        pokelist.results.forEach(element => {
+          this.dxs.getPokemon(element.name).subscribe(pokeitem => {
+            let newObj: Pokemon = {
+              name: pokeitem.name,
+              image: pokeitem.sprites.front_default,
+              number: pokeitem.id,
+              status: 0
+            }
+            this.filteredPokemons.push(newObj);
+            console.log(pokeitem);
+          });
+        });
+      });
+    } else {
+      this.dxs.getPokemon(this.searchTerm.toLowerCase()).subscribe(pokeitem => {
+        let newObj: Pokemon = {
+          name: pokeitem.name,
+          image: pokeitem.sprites.front_default,
+          number: pokeitem.id,
+          status: 0
+        }
+        this.filteredPokemons.push(newObj);
+        console.log(pokeitem);
+      });
+    }
+    //this.filteredPokemons = this.pokemons.filter(poke =>
+    //  poke.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    //);
   }
-  backToone(){
+  backToone() {
     this.intPaso = 1;
   }
-  backTozero(){
+  backTozero() {
     this.intPaso = 0;
   }
   async savePokemons(): Promise<void> {
@@ -151,7 +161,7 @@ export class AppComponent implements OnInit {
       setTimeout(() => {
         this.misPokemon = this.pokemons.filter(pokemon => pokemon.status === 1);
         this.intPaso = 2;
-        this.titleStrong = "¡Hola " + this.nombre+"!";
+        this.titleStrong = "¡Hola " + this.nombre + "!";
         this.titleLigth = "";
         this.subTitle = "";
         resolve();
@@ -199,7 +209,19 @@ export class AppComponent implements OnInit {
         this.edad = `${edadAnios} años`;
         this.dxs.getPokemons().subscribe(pokelist => {
           this.pokelist = pokelist;
-          console.log(pokelist)
+          this.filteredPokemons = [];
+          pokelist.results.forEach(element => {
+            this.dxs.getPokemon(element.name).subscribe(pokeitem => {
+              let newObj: Pokemon = {
+                name: pokeitem.name,
+                image: pokeitem.sprites.front_default,
+                number: pokeitem.id,
+                status: 0
+              }
+              this.filteredPokemons.push(newObj);
+              console.log(pokeitem);
+            });
+          });
         });
 
         resolve();
